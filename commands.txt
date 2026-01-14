@@ -1,0 +1,25 @@
+
+# make sure I can pull image down to my dockker
+
+docker pull <region>-docker.pkg.dev/<project-id>/<registry-name>/<image-name>:<image-tag>
+
+where
+<region> = europe-west1
+<project-id> = dtumlops-484115
+<registry-name> = docker-registry
+ <image-name> =. cloud # specified in couldbuild.yaml. In this case, cloud:latest
+ : <image-tag> = latest
+
+docker pull europe-west1.pkg.dev/dtumlops-484115/docker-registry/cloud:latest
+
+
+
+--- Command to build:
+gcloud builds submit . --config=cloudbuild.yaml
+
+----
+
+gcloud artifacts repositories set-cleanup-policies REPOSITORY \ 
+    --project=dtumlops-484115 \
+    --location=europe-west1 \
+    --policy=policy.yaml
